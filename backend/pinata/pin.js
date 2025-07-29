@@ -6,6 +6,8 @@ const pinata = new PinataSDK({
   pinataGateway: process.env.PINATA_GATEWAY,
 });
 
+// console.log(`this is gateway: ${pinataGateway}`);
+
 async function pinMessage(message) {
   const content = {
     text: message,
@@ -17,10 +19,22 @@ async function pinMessage(message) {
         name: "GroupMessage",
       },
     });
-    console.log("IPFS CID:", upload.IpfsHash);
+    console.log("IPFS CID:", upload);
     return upload.IpfsHash;
   } catch (error) {
     console.error("Error pinning message:", error);
   }
 }
-pinMessage("gm gm");
+
+async function getIpfsContent(CID) {
+  const url = `https://gateway.pinata.cloud/ipfs/${CID}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("IPFS Content:", data.text);
+  } catch (error) {
+    console.log(error);
+  }
+}
+// pinMessage("gm ");
+getIpfsContent("QmQqYFL2acy5yiNK4V3JZwVsSDDJWtrFvkXMRuwUN3CnSM");
