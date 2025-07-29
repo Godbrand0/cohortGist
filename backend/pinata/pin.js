@@ -36,5 +36,5 @@ async function getIpfsContent(CID) {
     console.log(error);
   }
 }
-// pinMessage("gm ");
+pinMessage("gm ");
 getIpfsContent("QmQqYFL2acy5yiNK4V3JZwVsSDDJWtrFvkXMRuwUN3CnSM");
