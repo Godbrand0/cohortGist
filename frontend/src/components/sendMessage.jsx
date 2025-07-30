@@ -1,9 +1,18 @@
-import React, { useState } from "react";
-import "./App.css";
-import { getContract } from "./utlis/contract";
+import React, { useState, useEffect } from "react";
 
-export const SendMessage = () => {
+import { getContract } from "../utlis/contract";
+
+const SendMessage = () => {
   const [IpfsHash, setIpfsHash] = useState("");
+  const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    async function fetchAccount() {
+      const account = await window.ethereum.request({ method: "eth_accounts" });
+      setAddress(account[0]);
+    }
+    fetchAccount();
+  }, []);
 
   const sendMessage = async () => {
     try {
@@ -22,8 +31,11 @@ export const SendMessage = () => {
 
   return (
     <>
-      <div>
+      <div className="container mx-auto max-w-max flex flex-col items-center justify-center h-screen">
         <h1 className="text-3xl font-bold">cohortGist</h1>
+        <p className="text-lg mt-4">
+          Connected Address: {address.slice()}
+        </p>
 
         <div>
           <input
@@ -44,3 +56,4 @@ export const SendMessage = () => {
     </>
   );
 };
+export default SendMessage;

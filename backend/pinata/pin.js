@@ -6,8 +6,6 @@ const pinata = new PinataSDK({
   pinataGateway: process.env.PINATA_GATEWAY,
 });
 
-// console.log(`this is gateway: ${pinataGateway}`);
-
 async function pinMessage(message) {
   const content = {
     text: message,
@@ -36,5 +34,7 @@ async function getIpfsContent(CID) {
     console.log(error);
   }
 }
-pinMessage("gm ");
-getIpfsContent("QmQqYFL2acy5yiNK4V3JZwVsSDDJWtrFvkXMRuwUN3CnSM");
+// pinMessage("gm ");
+// getIpfsContent("QmQqYFL2acy5yiNK4V3JZwVsSDDJWtrFvkXMRuwUN3CnSM");
+
+module.exports = { pinMessage, getIpfsContent };
